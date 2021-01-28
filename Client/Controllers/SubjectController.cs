@@ -59,7 +59,7 @@ namespace Client.Controllers
                 else
                 {
                     return Content("GAGAL");
-                }
+                } 
             }
         }
 

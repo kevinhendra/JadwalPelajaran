@@ -35,13 +35,14 @@ $(document).ready(function () {
 function Save() {
     var StudentVM = new Object();
     StudentVM.Name = $('#Siswa').val();
-    debugger;
+   // debugger;
+    if (StudentVM.Name != "" || StudentVM.Name != " ") {
     $.ajax({
         type: "POST",
         url: '/Student/AddStudent',
         data: StudentVM
     }).then((result) => {
-        debugger;
+      //  debugger;
         console.log(result);
         if (result != "GAGAL") {
             Swal.fire({
@@ -50,7 +51,7 @@ function Save() {
                 icon: 'success',
                 title: 'Added Successfully'
             });
-            debugger;
+        //    debugger;
             table.ajax.reload();
         }
         else {
@@ -64,10 +65,17 @@ function Save() {
     }).catch((error) => {
         console.log(error);
     });
+    } else {
+        Swal.fire({
+            position: 'center',
+            type: 'error',
+            icon: 'error',
+            title: "Data can't be empty"
+        });
+    }
 }
 
 function Add() {
-    $('#Siswa').val('');
     $('#updateBtn').hide();
     $('#saveBtn').show();
     ClearScreen();
@@ -82,7 +90,7 @@ function GetById(Id) {
     $('#Siswa').val("");
     $('#updateBtn').show();
     $('#saveBtn').hide();
-    debugger;
+ //   debugger;
     $.ajax({
         url: "/Student/GetById/" + Id,
         type: "GET",
@@ -90,7 +98,7 @@ function GetById(Id) {
         dataType: "json",
         async: false,
         success: function (result) {
-            debugger;
+        //    debugger;
             const obj = JSON.parse(result);
             $('#Id').val(obj.id);
             $('#Siswa').val(obj.name);
@@ -106,13 +114,14 @@ function Update() {
     var StudentVM = new Object();
     StudentVM.Id = $('#Id').val();
     StudentVM.Name = $('#Siswa').val();
-    debugger;
+ //   debugger;
+    if (StudentVM.Name != "" || StudentVM.Name != " ") {
     $.ajax({
         type: "PUT",
         url: '/Student/UpdateStudent',
         data: StudentVM
     }).then((result) => {
-        debugger;
+   //     debugger;
         console.log(result);
         if (result != "GAGAL") {
             Swal.fire({
@@ -135,6 +144,14 @@ function Update() {
     }).catch((error) => {
         console.log(error);
     });
+} else {
+    Swal.fire({
+        position: 'center',
+        type: 'error',
+        icon: 'error',
+        title: "Data can't be empty"
+    });
+}
 }
 
 function Delete(Id) {
@@ -147,13 +164,13 @@ function Delete(Id) {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.value) {
-            debugger;
+       //     debugger;
             $.ajax({
                 url: "/Student/Delete/" + Id,
                 data: { Id: Id },
                 type: "DELETE",
             }).then((result) => {
-                debugger;
+      //          debugger;
                 if (result != "GAGAL") {
                     Swal.fire({
                         position: 'center',

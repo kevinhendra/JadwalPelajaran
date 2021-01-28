@@ -34,39 +34,47 @@ $(document).ready(function () {
 function Save() {
     var MapelVM = new Object();
     MapelVM.Name = $('#Subject').val();
-    debugger;
-    $.ajax({
-        type: "POST",
-        url: '/Subject/AddSubject',
-        data: MapelVM
-    }).then((result) => {
-        debugger;
-        console.log(result);
-        if (result != "GAGAL") {
-            Swal.fire({
-                position: 'center',
-                type: 'success',
-                icon: 'success',
-                title: 'Added Successfully'
-            });
-            debugger;
-            table.ajax.reload();
-        }
-        else {
-            Swal.fire({
-                position: 'center',
-                type: 'error',
-                icon: 'error',
-                title: 'Failed to add!'
-            });
-        }
-    }).catch((error) => {
-        console.log(error);
-    });
+    //debugger;
+    if (MapelVM.Name != "" || MapelVM.Name != " ") {
+        $.ajax({
+            type: "POST",
+            url: '/Subject/AddSubject',
+            data: MapelVM
+        }).then((result) => {
+         //   debugger;
+            console.log(result);
+            if (result != "GAGAL") {
+                Swal.fire({
+                    position: 'center',
+                    type: 'success',
+                    icon: 'success',
+                    title: 'Added Successfully'
+                });
+            //    debugger;
+                table.ajax.reload();
+            }
+            else {
+                Swal.fire({
+                    position: 'center',
+                    type: 'error',
+                    icon: 'error',
+                    title: 'Failed to add!'
+                });
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    } else {
+        Swal.fire({
+            position: 'center',
+            type: 'error',
+            icon: 'error',
+            title: "Data can't be empty"
+        });
+    }
 }
 
 function Add() {
-    $('#Subject').val('');
     $('#updateBtn').hide();
     $('#saveBtn').show();
     ClearScreen();
@@ -80,7 +88,7 @@ function GetById(Id) {
     $('#Subject').val("");
     $('#updateBtn').show();
     $('#saveBtn').hide();
-    debugger;
+   // debugger;
     $.ajax({
         url: "/Subject/GetById/" + Id,
         type: "GET",
@@ -88,7 +96,7 @@ function GetById(Id) {
         dataType: "json",
         async: false,
         success: function (result) {
-            debugger;
+           // debugger;
             const obj = JSON.parse(result);
             $('#Id').val(obj.id);
             $('#Subject').val(obj.name);
@@ -110,13 +118,13 @@ function Delete(Id) {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.value) {
-            debugger;
+           // debugger;
             $.ajax({
                 url: "/Subject/Delete/" + Id,
                 data: { Id: Id },
                 type: "DELETE",
             }).then((result) => {
-                debugger;
+               // debugger;
                 if (result != "GAGAL") {
                     Swal.fire({
                         position: 'center',
@@ -139,13 +147,14 @@ function Update() {
     var MapelVM = new Object();
     MapelVM.Id = $('#Id').val();
     MapelVM.Name = $('#Subject').val();
-    debugger;
+   // debugger;
+    if (MapelVM.Name != "" || MapelVM.Name != " ") {
     $.ajax({
         type: "PUT",
         url: '/Subject/UpdateSubject',
         data: MapelVM
     }).then((result) => {
-        debugger;
+       // debugger;
         console.log(result);
         if (result != "GAGAL") {
             Swal.fire({
@@ -168,4 +177,12 @@ function Update() {
     }).catch((error) => {
         console.log(error);
     });
+    } else {
+        Swal.fire({
+            position: 'center',
+            type: 'error',
+            icon: 'error',
+            title: "Data can't be empty"
+        });
+    }
 }

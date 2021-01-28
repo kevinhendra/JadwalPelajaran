@@ -41,6 +41,28 @@ namespace Client.Controllers
             }
             return Json(lessonVMs);
         }
+        [HttpPut]
+        public ActionResult UpdateLesson(LessonVM lessonVM)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44386/api/");
+                MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                client.DefaultRequestHeaders.Accept.Add(contentType);
+                string data = JsonConvert.SerializeObject(lessonVM);
+                var contentData = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = client.PutAsync("Lessons", contentData).Result;
+                if (response.IsSuccessStatusCode == true)
+                {
+                    return Json(response.Content.ReadAsStringAsync().Result.ToString());
+                }
+                else
+                {
+                    return Content("GAGAL");
+                }
+
+            }
+        }
 
         [HttpGet]
         public ActionResult GetById(int Id)
@@ -62,6 +84,51 @@ namespace Client.Controllers
                     return Content("GAGAL");
                 }
 
+            }
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(int Id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44386/api/");
+                MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                client.DefaultRequestHeaders.Accept.Add(contentType);
+                string data = JsonConvert.SerializeObject(Id);
+                var contentData = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = client.DeleteAsync("Lessons/" + Id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return Json(response.Content.ReadAsStringAsync().Result.ToString());
+                }
+                else
+                {
+                    return Content("GAGAL");
+                }
+
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddLesson(LessonVM lessonVM)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44386/api/");
+                MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                client.DefaultRequestHeaders.Accept.Add(contentType);
+                string data = JsonConvert.SerializeObject(lessonVM);
+                var contentData = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = client.PostAsync("Lessons", contentData).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return Json(response.Content.ReadAsStringAsync().Result.ToString());
+                }
+                else
+                {
+                    return Content("GAGAL");
+                }
             }
         }
     }

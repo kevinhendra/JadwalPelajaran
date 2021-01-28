@@ -78,14 +78,13 @@
                 <ul id="sidebarnav">
                     <li class="nav-small-cap">MENU</li>
                     <li>
-                        <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="index.html">Modern Dashboard</a></li>
-                            <li><a href="index2.html">Awesome Dashboard</a></li>
-                            <li><a href="index3.html">Classy Dashboard</a></li>
-                            <li><a href="index4.html">Analytical Dashboard</a></li>
-                            <li><a href="index5.html">Minimal Dashboard</a></li>
-                        </ul>
+                        <a href="/Student/index" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Student</span></a>
+                    </li>
+                    <li>
+                        <a href="/Subject/index" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">Subject</span></a>
+                    </li>
+                    <li>
+                        <a href="/Lesson/index" aria-expanded="false"><i class="mdi mdi-view-module"></i><span class="hide-menu">Lesson</span></a>
                     </li>
                 </ul>
             </nav>
@@ -93,14 +92,14 @@
         </div>
         <!-- End Sidebar scroll-->
         <!-- Bottom points-->
-        <div class="sidebar-footer">
+        <!--<div class="sidebar-footer">-->
             <!-- item-->
-            <a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+            <!--<a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>-->
             <!-- item-->
-            <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
+            <!--<a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>-->
             <!-- item-->
-            <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
-        </div>
+            <!--<a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+        </div>-->
         <!-- End Bottom points-->
     </aside>
     <!-- ============================================================== -->
@@ -187,10 +186,19 @@
                                                            hidden>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="Siswa">Student Name : </label>
-                                                    <div class='input-group'>
-                                                        <input type="text" class="form-control" Id="Siswa"
-                                                               placeholder="Enter Student Name" name="Siswa">
+                                                    <label for="Student">Student Name : </label>
+                                                    <div class="form-group">
+                                                        <select class="form-control" id="Student">
+                                                            <option value="" disabled selected>---Select Student--</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Subject">Subject Name : </label>
+                                                    <div class="form-group">
+                                                        <select class="form-control" id="Subject">
+                                                            <option value="" disabled selected>---Select Subject--</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 @*</form>*@
@@ -278,7 +286,7 @@
                     <!-- ============================================================== -->
                     <!-- footer -->
                     <!-- ============================================================== -->
-                    <footer class="footer"> © 2017 Monster Admin by wrappixel.com </footer>
+                    <footer class="footer"> @*© 2017 Monster Admin by wrappixel.com*@ </footer>
                     <!-- ============================================================== -->
                     <!-- End footer -->
                     <!-- ============================================================== -->
