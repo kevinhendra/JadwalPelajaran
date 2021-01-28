@@ -90,7 +90,7 @@ function GetById(Id) {
         success: function (result) {
             debugger;
             const obj = JSON.parse(result);
-            $('#Id').val(obj.Id);
+            $('#Id').val(obj.id);
             $('#Subject').val(obj.name);
             $('#myModal').modal('show');
         },
@@ -132,5 +132,40 @@ function Delete(Id) {
                 }
             })
         };
+    });
+}
+
+function Update() {
+    var MapelVM = new Object();
+    MapelVM.Id = $('#Id').val();
+    MapelVM.Name = $('#Subject').val();
+    debugger;
+    $.ajax({
+        type: "PUT",
+        url: '/Subject/UpdateSubject',
+        data: MapelVM
+    }).then((result) => {
+        debugger;
+        console.log(result);
+        if (result != "GAGAL") {
+            Swal.fire({
+                position: 'center',
+                type: 'success',
+                icon: 'success',
+                title: 'Updated successfully!'
+            });
+            table.ajax.reload();
+            ClearScreen();
+        }
+        else {
+            Swal.fire({
+                position: 'center',
+                type: 'error',
+                icon: 'error',
+                title: 'Failed to update!'
+            });
+        }
+    }).catch((error) => {
+        console.log(error);
     });
 }

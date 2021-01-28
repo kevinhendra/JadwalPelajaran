@@ -87,16 +87,16 @@ namespace Client.Controllers
         }
 
         [HttpPut]
-        public ActionResult updatestudent(int Id)
+        public ActionResult UpdateStudent(StudentVM studentVM)
         {
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44386/api/");
                 MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
                 client.DefaultRequestHeaders.Accept.Add(contentType);
-                string data = JsonConvert.SerializeObject(Id);
+                string data = JsonConvert.SerializeObject(studentVM);
                 var contentData = new StringContent(data, Encoding.UTF8, "application/json");
-                var response = client.PutAsync("Students/" + Id, contentData).Result;
+                var response = client.PutAsync("Students", contentData).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return Json(response.Content.ReadAsStringAsync().Result.ToString());
@@ -105,6 +105,7 @@ namespace Client.Controllers
                 {
                     return Content("GAGAL");
                 }
+
             }
         }
 

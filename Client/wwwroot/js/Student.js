@@ -92,7 +92,7 @@ function GetById(Id) {
         success: function (result) {
             debugger;
             const obj = JSON.parse(result);
-            $('#Id').val(obj.Id);
+            $('#Id').val(obj.id);
             $('#Siswa').val(obj.name);
             $('#myModal').modal('show');
         },
@@ -104,12 +104,12 @@ function GetById(Id) {
 
 function Update() {
     var StudentVM = new Object();
-    StudentVM.Id = $('Id').val();
+    StudentVM.Id = $('#Id').val();
     StudentVM.Name = $('#Siswa').val();
     debugger;
     $.ajax({
         type: "PUT",
-        url: '/student/updatestudent' + id,
+        url: '/Student/UpdateStudent',
         data: StudentVM
     }).then((result) => {
         debugger;

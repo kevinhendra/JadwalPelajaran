@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Client.Controllers
@@ -39,7 +41,28 @@ namespace Client.Controllers
             }
             return Json(lessonVMs);
         }
+
+        [HttpGet]
+        public ActionResult GetById(int Id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44386/api/");
+                MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                client.DefaultRequestHeaders.Accept.Add(contentType);
+                string data = JsonConvert.SerializeObject(Id);
+                var contentData = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = client.GetAsync("Lessons/" + Id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return Json(response.Content.ReadAsStringAsync().Result.ToString());
+                }
+                else
+                {
+                    return Content("GAGAL");
+                }
+
+            }
+        }
     }
-
-
 }

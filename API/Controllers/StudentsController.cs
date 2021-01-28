@@ -36,10 +36,10 @@ namespace API.Controllers
             var create = myContext.SaveChanges();
             return create;
         }
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<int> Update(TbMSiswa student)
         {
-            var getId = await myContext.TbMSiswas.FirstOrDefaultAsync(x => x.Id == student.Id);
+            var getId = await myContext.TbMSiswas.FindAsync(student.Id);
             getId.Name = student.Name;
             var Update = myContext.SaveChanges();
             return Update;  

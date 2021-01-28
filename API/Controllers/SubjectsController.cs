@@ -37,11 +37,11 @@ namespace API.Controllers
             var create = myContext.SaveChanges();
             return create;
         }
-        [HttpPut("{id}")]
-        public async Task<int> Update(TbMMataPelajaran subject, int id)
+        [HttpPut]
+        public async Task<int> Update(MapelVM mapelVM)
         {
-            var getId = await myContext.TbMMataPelajarans.FirstOrDefaultAsync(x => x.Id == id);
-            getId.Name = subject.Name;
+            var getId = await myContext.TbMMataPelajarans.FindAsync(mapelVM.Id);
+            getId.Name = mapelVM.Name;
             var Update = myContext.SaveChanges();
             return Update;
         }
